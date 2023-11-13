@@ -26,7 +26,8 @@ class ListCard extends StatelessWidget {
             width: 90,
             child: Padding(
               padding: const EdgeInsets.all(3.0),
-              child: buildWidget(videoData.url),
+              //child: buildWidget(videoData.url),
+              child: Image.network(videoData.thumbnail),
             ),
           ),
            //Image(image: FileImage(File(opt(videoData.url)))),

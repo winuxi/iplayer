@@ -7,11 +7,13 @@ import 'package:iplayer/router/routes.dart';
 import 'package:iplayer/utils/constatnts.dart';
 
 import '../repository/video_repository.dart';
-import 'package:admob_flutter/admob_flutter.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+//import 'package:admob_flutter/admob_flutter.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Admob.initialize();
+  //Admob.initialize();
+  MobileAds.instance.initialize();
   VideoRepository videoRepository = VideoRepository();
   String color = await videoRepository.getBackgroundColor();
   runApp(MyApp(videoRepository: videoRepository, theme: color));

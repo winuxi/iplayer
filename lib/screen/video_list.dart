@@ -32,9 +32,6 @@ class _VideoListItemState extends State<VideoListItem> {
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
   @override
    initState() {
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.portraitUp,
-          DeviceOrientation.portraitDown]);
     context.read<VideoCubit>().loadVideos();
     super.initState();
     initConnectivity();
@@ -60,6 +57,9 @@ class _VideoListItemState extends State<VideoListItem> {
   final _appBar = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp,
+          DeviceOrientation.portraitDown]);
     return Scaffold(
       appBar: VideoAppBar(key: _appBar, title: "Videos",
           appBar: AppBar(), widgets: [
