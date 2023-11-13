@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:iplayer/router/params.dart';
 import 'package:video_player/video_player.dart';
-//import 'package:admob_flutter/admob_flutter.dart';
 import 'dart:io';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 class VideoPlayerScreen extends StatefulWidget {
@@ -98,12 +97,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           ),
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () => _togglePlayPause(),
-      //   child: Icon(_controller!.value.isPlaying
-      //       ? Icons.pause
-      //       : Icons.play_arrow),
-      // ),
     );
   }
 

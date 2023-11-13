@@ -146,11 +146,7 @@ class _VideoListItemState extends State<VideoListItem> {
                           context,
                           VideoPlayerScreen.routeName,
                           arguments: PlayerScreenArgs(video: videos[item])
-                      ).then((value){
-                        // SystemChrome.setPreferredOrientations(
-                        //     [DeviceOrientation.portraitUp,
-                        //       DeviceOrientation.portraitDown]);
-                      });
+                      );
                     }else{
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("Connection Not Available"),

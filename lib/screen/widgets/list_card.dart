@@ -31,9 +31,11 @@ class ListCard extends StatelessWidget {
             ),
           ),
            //Image(image: FileImage(File(opt(videoData.url)))),
+          Expanded(child:
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Text(
@@ -45,14 +47,16 @@ class ListCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Text(
-                  videoData.description,
+                  //videoData.description,
+                  'clipping it with a ClipRect widget before putting it in the flex, or using a scrollable container rather th',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(fontSize: 10),
                 ),
               ),
             ],
-          ),
+          )
+          ) ,
         ],
       ),
     );
@@ -81,8 +85,6 @@ class ListCard extends StatelessWidget {
     await getThumbnail(path).then((value){
       return Image.memory(value!);
     });
-    // return thumbnailData != null ? Image.memory(thumbnailData)
-    //     : const Icon(Icons.music_video);
   }
 
   Future<Uint8List?> getThumbnail(String path) async {
