@@ -57,9 +57,7 @@ class _VideoListItemState extends State<VideoListItem> {
   final _appBar = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.portraitUp,
-          DeviceOrientation.portraitDown]);
+
     return Scaffold(
       appBar: VideoAppBar(key: _appBar, title: "Videos",
           appBar: AppBar(), widgets: [
@@ -149,9 +147,9 @@ class _VideoListItemState extends State<VideoListItem> {
                           VideoPlayerScreen.routeName,
                           arguments: PlayerScreenArgs(video: videos[item])
                       ).then((value){
-                        SystemChrome.setPreferredOrientations(
-                            [DeviceOrientation.portraitUp,
-                              DeviceOrientation.portraitDown]);
+                        // SystemChrome.setPreferredOrientations(
+                        //     [DeviceOrientation.portraitUp,
+                        //       DeviceOrientation.portraitDown]);
                       });
                     }else{
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

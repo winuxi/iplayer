@@ -18,13 +18,12 @@ class VideoPlayerScreen extends StatefulWidget {
 class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   VideoPlayerController? _controller;
   GlobalKey<ScaffoldState> scaffoldState = GlobalKey();
-  //AdmobBannerSize? bannerSize;
-  //late AdmobInterstitial interstitialAd;
-  //late AdmobReward rewardAd;
 
   @override
   void initState() {
     super.initState();
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
     _controller = VideoPlayerController.networkUrl(
         Uri.parse(widget.args.video.url));
     _controller!.addListener(() {
@@ -33,40 +32,20 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     _controller!.setLooping(true);
     _controller!.initialize().then((_) => setState(() {}));
 
-    //
-    // bannerSize = AdmobBannerSize.BANNER;
-    //
-    // interstitialAd = AdmobInterstitial(
-    //   adUnitId: getInterstitialAdUnitId()!,
-    //   listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
-    //     if (event == AdmobAdEvent.closed) interstitialAd.load();
-    //     handleEvent(event, args, 'Interstitial');
-    //   },
-    // );
 
-    // rewardAd = AdmobReward(
-    //   adUnitId: getRewardBasedVideoAdUnitId()!,
-    //   listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
-    //     if (event == AdmobAdEvent.closed) rewardAd.load();
-    //     handleEvent(event, args, 'Reward');
-    //   },
-    // );
-
-    //interstitialAd.load();
     _showAdAndPlay();
   }
 
   _showAdAndPlay() {
-    // interstitialAd.isLoaded.then((value) => {
-    // interstitialAd.show(),
-    // _controller!.play()
-    // });
-    //_interstitiaAd.show();
     loadAd();
   }
 
   @override
   void dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     _controller?.dispose();
     super.dispose();
   }
@@ -75,8 +54,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
     return Scaffold(
       body: Container(
         color: Colors.black,
@@ -115,24 +92,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                             ),
                           ],
                         ))),
-                // Container(
-                //   margin: EdgeInsets.only(bottom: 20.0),
-                //   child: AdmobBanner(
-                //     adUnitId: getBannerAdUnitId()!,
-                //     adSize: bannerSize!,
-                //     listener: (AdmobAdEvent event,
-                //         Map<String, dynamic>? args) {
-                //       handleEvent(event, args, 'Banner');
-                //     },
-                //     onBannerCreated:
-                //         (AdmobBannerController controller) {
-                //       // Dispose is called automatically for you when Flutter removes the banner from the widget tree.
-                //       // Normally you don't need to worry about disposing this yourself, it's handled.
-                //       // If you need direct access to dispose, this is your guy!
-                //       // controller.dispose();
-                //     },
-                //   ),
-                // ),
+
               ],
             ),
           ),
@@ -186,84 +146,16 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   }
 
   void showSnackBar(String content) {
-    // ScaffoldMessenger.of(context).showSnackBar(
-    //   SnackBar(
-    //     content: Text(content),
-    //     duration: Duration(milliseconds: 1500),
-    //   ),
-    // );
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(content),
+        duration: Duration(milliseconds: 1500),
+      ),
+    );
   }
-  // void _showInterstitialAd() {
-  //   if (_interstitialAd == null) {
-  //     // Ad is not loaded yet.
-  //     return;
-  //   }
-  //
-  //   interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
-  //     onAdDismissedFullScreenContent: (InterstitialAd ad) {
-  //       ad.dispose();
-  //       // Ad dismissed.
-  //     },
-  //     onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
-  //       ad.dispose();
-  //       // Ad failed to show.
-  //     },
-  //   );
-  //
-  //   interstitialAd.show();
-  // }
-  //
-  // void handleEvent(AdmobAdEvent event, Map<String, dynamic>? args,
-  //     String adType) {
-  //   switch (event) {
-  //     case AdmobAdEvent.loaded:
-  //       showSnackBar('New Admob $adType Ad loaded!');
-  //       break;
-  //     case AdmobAdEvent.opened:
-  //       showSnackBar('Admob $adType Ad opened!');
-  //       break;
-  //     case AdmobAdEvent.closed:
-  //       showSnackBar('Admob $adType Ad closed!');
-  //       break;
-  //     case AdmobAdEvent.failedToLoad:
-  //       showSnackBar('Admob $adType failed to load. :(');
-  //       break;
-  //     case AdmobAdEvent.rewarded:
-  //       showDialog(
-  //         context: scaffoldState.currentContext!,
-  //         builder: (BuildContext context) {
-  //           return WillPopScope(
-  //             onWillPop: () async {
-  //               ScaffoldMessenger.of(context).hideCurrentSnackBar();
-  //               return true;
-  //             },
-  //             child: AlertDialog(
-  //               content: Column(
-  //                 mainAxisSize: MainAxisSize.min,
-  //                 children: <Widget>[
-  //                   Text('Reward callback fired. Thanks Andrew!'),
-  //                   Text('Type: ${args!['type']}'),
-  //                   Text('Amount: ${args['amount']}'),
-  //                 ],
-  //               ),
-  //             ),
-  //           );
-  //         },
-  //       );
-  //       break;
-  //     default:
-  //   }
-  // }
-  //
 
   InterstitialAd? _interstitialAd;
 
-  // TODO: replace this test ad unit with your own ad unit.
-  final adUnitId = Platform.isAndroid
-      ? 'ca-app-pub-3940256099942544/1033173712'
-      : 'ca-app-pub-3940256099942544/4411468910';
-
-  /// Loads an interstitial ad.
   void loadAd() {
     InterstitialAd.load(
         adUnitId: getInterstitialAdUnitId()!,
