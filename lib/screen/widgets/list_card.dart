@@ -47,8 +47,7 @@ class ListCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Text(
-                  //videoData.description,
-                  'clipping it with a ClipRect widget before putting it in the flex, or using a scrollable container rather th',
+                  videoData.description,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(fontSize: 10),
